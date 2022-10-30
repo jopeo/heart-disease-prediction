@@ -8,7 +8,7 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 st.set_page_config(page_title="Heart Disease Prediction",
                    page_icon='./res/heart.png')
 
-st.image('./res/heart_section.gif.png')
+st.image('./res/heart_section.gif')
 
 df_name = "df.h5"
 model_name = "model8.h5"
