@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-import pandas import DataFrame, concat, read_hdf
 import streamlit as st
+from pandas import DataFrame, concat, read_hdf
 from tensorflow.keras.models import load_model
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
