@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-import pandas as pd
+import pandas import DataFrame, concat, read_hdf
 import streamlit as st
-from keras.models import load_model
+from tensorflow.keras.models import load_model
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
 st.set_page_config(page_title="Heart Disease Prediction",
@@ -261,27 +261,27 @@ def process(prediction_data, X):
 	rows_to_keep = prediction_data.shape[0]
 	
 	# inputs = pd.concat([X, z])
-	inputs = pd.concat([X, prediction_data])
+	inputs = concat([X, prediction_data])
 	# inputs.shape
 	
 	# todo: replace NaNs with most frequent (mode) (X_mode)
 	
-	processed = pd.DataFrame()
+	processed = DataFrame()
 	
 	for cat in features_cat:
 		# print(cat)
 		one_hots = OneHotEncoder()
 		cat_encoded = one_hots.fit_transform(inputs[[cat]])
 		cat_encoded_names = one_hots.get_feature_names_out([cat])
-		cat_encoded = pd.DataFrame(cat_encoded.todense(), columns=cat_encoded_names)
+		cat_encoded = DataFrame(cat_encoded.todense(), columns=cat_encoded_names)
 		# print(cat_encoded_names)
 		# print(len(cat_encoded_names))
-		processed = pd.concat([processed, cat_encoded], axis=1)
+		processed = concat([processed, cat_encoded], axis=1)
 	
 	for num in features_num:
 		num_scaled = StandardScaler().fit_transform(inputs[[num]])
-		num_scaled = pd.DataFrame(num_scaled, columns=[num])
-		processed = pd.concat([processed, num_scaled], axis=1)
+		num_scaled = DataFrame(num_scaled, columns=[num])
+		processed = concat([processed, num_scaled], axis=1)
 	
 	to_model = processed.iloc[processed.shape[0] - rows_to_keep:].copy()
 	# to_model.shape
@@ -291,8 +291,8 @@ def process(prediction_data, X):
 
 def show_predict_page():
 	
-	X = pd.read_hdf(df_name)
-	new_entry = pd.DataFrame(0, index=range(1), columns=X.columns)
+	X = read_hdf(df_name)
+	new_entry = DataFrame(0, index=range(1), columns=X.columns)
 	
 	st.title("Heart Disease Prediction")
 	st.subheader("A deep neural network for predicting heart disease")
