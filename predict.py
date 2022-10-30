@@ -8,6 +8,14 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 st.set_page_config(page_title="Heart Disease Prediction",
                    page_icon='./res/heart.png')
 
+hide_menu_style = """
+        <style>
+        #MainMenu {visibility: hidden;}
+        footer {visibility: hidden;}
+        </style>
+        """
+st.markdown(hide_menu_style, unsafe_allow_html=True)
+
 st.image('./res/heart_section.gif')
 
 df_name = "df.h5"
@@ -304,6 +312,7 @@ def show_predict_page():
 	new_entry.iloc[0]._STATE = states.index(state) + 1
 	
 	metstat = st.radio("Do you live in a metropolitan county?", metstats)
+	st.write('<style>div.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True)
 	new_entry.iloc[0]._METSTAT = metstats.index(metstat) + 1
 
 	urbstat = st.radio("Do you live in a urban or rural county?", urbstats)
