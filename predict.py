@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 
 import pandas as pd
-import numpy
 import streamlit as st
-from keras import Sequential, layers
 from keras.models import load_model
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
@@ -447,25 +445,6 @@ def show_predict_page():
 		# calculate and show
 		to_predict = process(new_entry, X)
 		input_shape = [to_predict.shape[1]]
-		
-		m = 2
-		model = keras.Sequential([
-				layers.BatchNormalization(input_shape=input_shape),
-				# the hidden ReLU layers
-				layers.Dense(units=64 * m, activation='relu'),  # , input_shape=input_shape),
-				layers.BatchNormalization(),
-				layers.Dropout(rate=0.3),  # apply 30% dropout to the next layer
-				layers.Dense(units=64 * m, activation='relu'),
-				layers.BatchNormalization(),
-				layers.Dropout(rate=0.3),  # apply 30% dropout to the next layer
-				layers.Dense(units=64 * m, activation='relu'),
-				layers.BatchNormalization(),
-				layers.Dropout(rate=0.3),  # apply 30% dropout to the next layer
-				# the linear output layer
-				# layers.Dense(units=1),
-				layers.Dense(1, activation='sigmoid')
-		])
-		
 		
 		model = load_model(model_name)
 		
