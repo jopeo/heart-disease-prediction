@@ -6,7 +6,9 @@ from tensorflow.keras.models import load_model
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
 st.set_page_config(page_title="Heart Disease Prediction",
-                   page_icon='../Images/heart.png')
+                   page_icon='./res/heart.png')
+
+st.image('./res/heart_section.gif.png')
 
 df_name = "df.h5"
 model_name = "model8.h5"
