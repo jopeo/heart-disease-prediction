@@ -3,9 +3,7 @@
 import pandas as pd
 import numpy
 import streamlit as st
-import tensorflow as tf
-from tensorflow import keras
-from keras import layers
+from keras import Sequential, layers
 from keras.models import load_model
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
