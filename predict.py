@@ -2,16 +2,24 @@
 
 import streamlit as st
 from pandas import DataFrame, concat, read_hdf
-from tensorflow.keras.models import load_model
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from joblib import load
 
 st.set_page_config(page_title="Heart Disease Prediction",
                    page_icon='./res/heart.png')
 
-st.image('./res/heart_section.gif.png')
+hide_menu_style = """
+        <style>
+        #MainMenu {visibility: hidden;}
+        footer {visibility: hidden;}
+        </style>
+        """
+st.markdown(hide_menu_style, unsafe_allow_html=True)
+
+st.image('./res/heart_section.gif')
 
 df_name = "df.h5"
-model_name = "model8.h5"
+model_name = "model11.joblib"
 
 
 states = (
@@ -297,13 +305,14 @@ def show_predict_page():
 	new_entry = DataFrame(0, index=range(1), columns=X.columns)
 	
 	st.title("Heart Disease Prediction")
-	st.subheader("A deep neural network for predicting heart disease")
+	st.subheader("A machine learning algorithm for predicting heart disease")
 	
 	state = st.selectbox("In which state do you reside?", states)
 	# todo: check state entries compared with model numbers
 	new_entry.iloc[0]._STATE = states.index(state) + 1
 	
 	metstat = st.radio("Do you live in a metropolitan county?", metstats)
+	st.write('<style>div.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True)
 	new_entry.iloc[0]._METSTAT = metstats.index(metstat) + 1
 
 	urbstat = st.radio("Do you live in a urban or rural county?", urbstats)
@@ -445,17 +454,18 @@ def show_predict_page():
 	
 	if clicked:
 		# calculate and show
-		to_predict = process(new_entry, X)
-		input_shape = [to_predict.shape[1]]
+		# to_predict = process(new_entry, X)
+		# input_shape = [to_predict.shape[1]]
 		
-		model = load_model(model_name)
+		model = load(model_name)
 		
-		y_new = model.predict(to_predict)
+		y_new = model.predict_proba(new_entry)
 		
 		# st.write(f"Your calculated probability of heart disease is: {100*clicked:.2f}% \n")
 		# st.subheader(f"Your calculated probability of heart disease is: {y_new}% \n {type(y_new)}")
 		st.subheader(f"Your calculated probability of heart disease is:")
-		st.header(f" {100*float(y_new[[0]]):.2f}% \n")
+		st.header(f" {100*y_new[0][1]:.2f}%")
+		# st.header(f" {100*float(y_new[[0]]):.2f}% \n")
 		clicked = False
 		
 	
