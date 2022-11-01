@@ -19,7 +19,7 @@ st.markdown(hide_menu_style, unsafe_allow_html=True)
 st.image('./res/heart_section.gif')
 
 df_name = "df.h5"
-model_name = "model11.joblib"
+model_name = "heart_model_RUS.joblib"
 
 
 states = (
