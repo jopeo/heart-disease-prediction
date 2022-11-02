@@ -18,8 +18,8 @@ st.markdown(hide_menu_style, unsafe_allow_html=True)
 
 st.image('./res/heart_section.gif')
 
-df_name = "heart_cleaned.h5"
-model_name = "heart_model_RUS.joblib"
+df_name = "heart_cleaned_2.h5"
+model_name = "heart_model_RUS_2.joblib"
 
 
 states = (
