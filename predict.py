@@ -5,7 +5,7 @@ from pandas import DataFrame, concat, read_hdf
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from joblib import load
 
-click_url = "https://google.com/maps/search/cardiologist+near+me"
+click_url = "https://google.com/maps/search/cardiac+surgeon+near+me"
 
 st.set_page_config(page_title="Heart Disease Prediction",
                    page_icon='./res/heart.png')
@@ -570,7 +570,7 @@ def show_predict_page():
 
 		if pct > 30:
 			st.markdown(f"""
-<a href={click_url}><button>Find a cardiologist near you!</button></a>
+<a href={click_url}><button style="background-color:GreenYellow;">Find a heart doctor near you!</button></a>
 """,
 unsafe_allow_html=True)
 
