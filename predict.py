@@ -304,7 +304,7 @@ def show_predict_page():
 	st.title("Heart Disease Predictor")
 	st.subheader("A machine learning prototype algorithm for predicting heart disease")
 	st.markdown(f"DISCLAIMER: This prototype is for educational purposes only and should not be used for health care "
-				f"decision making. To get a true assessment of heart disease, visit a [heart doctor near you]({click_url})")
+				f"decision making. To get a true assessment of heart disease, visit a [heart doctor near you]({click_url}).")
 
 	state = st.selectbox("In which state do you reside?", states)
 	# todo: check state entries compared with model numbers
