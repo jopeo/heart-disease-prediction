@@ -7,7 +7,7 @@ from joblib import load
 
 click_url = "https://google.com/maps/search/cardiac+surgeon+near+me"
 
-st.set_page_config(page_title="Heart Disease Prediction",
+st.set_page_config(page_title="Heart Disease Predictor Prototype",
                    page_icon='./res/heart.png')
 
 hide_menu_style = """
@@ -301,9 +301,11 @@ def show_predict_page():
 	X = read_hdf(cleaned_data)
 	new_entry = DataFrame(0, index=range(1), columns=X.columns)
 	
-	st.title("Heart Disease Prediction")
-	st.subheader("A machine learning algorithm for predicting heart disease")
-	
+	st.title("Heart Disease Predictor")
+	st.subheader("A machine learning prototype algorithm for predicting heart disease")
+	st.markdown(f"DISCLAIMER: This prototype is for educational purposes only and should not be used for health care "
+				f"decision making. To get a true assessment of heart disease, visit a [heart doctor near you]({click_url})")
+
 	state = st.selectbox("In which state do you reside?", states)
 	# todo: check state entries compared with model numbers
 	new_entry.iloc[0]._STATE = states.index(state) + 1
